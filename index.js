@@ -129,7 +129,12 @@ function setScreen() {
 
 setScreen();
 
+//works in sfari
 window.addEventListener("resize", () => setTimeout(setScreen, 500));
+if (screen.orientation) {
+  //chrome
+  screen.orientation.addEventListener("change", setScreen);
+}
 
 function clearScreen() {
   ctx.fillStyle = "white";
