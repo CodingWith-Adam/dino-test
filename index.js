@@ -50,12 +50,30 @@ let scaleRatio;
 
 function setScreen() {
   console.log("setScreen");
+
+  const screenHeight = Math.min(
+    window.innerHeight,
+    document.documentElement.clientHeight
+  );
+
+  const screenWidth = Math.min(
+    window.innerWidth,
+    document.documentElement.clientWidth
+  );
+
   //window is wider than the game width
-  if (window.innerWidth / window.innerHeight < GAME_WIDTH / GAME_HEIGHT) {
-    scaleRatio = window.innerWidth / GAME_WIDTH;
+  if (screenWidth / screenHeight < GAME_WIDTH / GAME_HEIGHT) {
+    scaleRatio = screenWidth / GAME_WIDTH;
   } else {
-    scaleRatio = window.innerHeight / GAME_HEIGHT;
+    scaleRatio = screenHeight / GAME_HEIGHT;
   }
+
+  //window is wider than the game width
+  // if (window.innerWidth / window.innerHeight < GAME_WIDTH / GAME_HEIGHT) {
+  //   scaleRatio = window.innerWidth / GAME_WIDTH;
+  // } else {
+  //   scaleRatio = window.innerHeight / GAME_HEIGHT;
+  // }
 
   canvas.width = GAME_WIDTH * scaleRatio;
   canvas.height = GAME_HEIGHT * scaleRatio;
@@ -111,7 +129,7 @@ function setScreen() {
 
 setScreen();
 
-window.addEventListener("resize", () => setTimeout(setScreen, 500));
+window.addEventListener("resize", setScreen);
 
 function clearScreen() {
   ctx.fillStyle = "white";
