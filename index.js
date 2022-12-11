@@ -129,7 +129,7 @@ function setScreen() {
 
 setScreen();
 
-//works in sfari
+//works in safari
 window.addEventListener("resize", () => setTimeout(setScreen, 500));
 if (screen.orientation) {
   //chrome
