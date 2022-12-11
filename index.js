@@ -126,13 +126,23 @@ function startGameText() {
   ctx.fillText("Tap Screen or Press Space To Start", x, y);
 }
 
-function gameOverText() {
+let hasSetRestartEvents = false;
+function setGameOver() {
   const fontSize = 40 * scaleRatio;
   ctx.font = `${fontSize}px serif`;
   ctx.fillStyle = "red";
   const x = canvas.width / 3.5;
   const y = canvas.height / 2;
   ctx.fillText("GAME OVER", x, y);
+
+  if (!hasSetRestartEvents) {
+    hasSetRestartEvents = true;
+
+    setTimeout(() => {
+      document.addEventListener("keyup", reset, { once: true });
+      document.addEventListener("touchstart", reset, { once: true });
+    }, 1000);
+  }
 }
 
 function updateGameSpeed(frameTimeDelta) {
@@ -161,7 +171,7 @@ function gameLoop(currentTime) {
 
   if (cactiController.collideWith(player)) {
     gameOver = true;
-    gameOverText();
+    setGameOver();
     score.setHighScore();
   }
 
@@ -181,7 +191,7 @@ requestAnimationFrame(gameLoop);
 
 const reset = () => {
   waitingToStart = false;
-
+  hasSetRestartEvents = false;
   if (gameOver) {
     player.reset();
     ground.reset();
@@ -192,5 +202,5 @@ const reset = () => {
   }
 };
 
-document.addEventListener("keyup", reset);
-document.addEventListener("touchstart", reset);
+document.addEventListener("keyup", reset, { once: true });
+document.addEventListener("touchstart", reset, { once: true });
