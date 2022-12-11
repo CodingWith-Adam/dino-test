@@ -49,6 +49,7 @@ let score;
 let scaleRatio;
 
 function setScreen() {
+  console.log("setScreen");
   //window is wider than the game width
   if (window.innerWidth / window.innerHeight < GAME_WIDTH / GAME_HEIGHT) {
     scaleRatio = window.innerWidth / GAME_WIDTH;
@@ -111,6 +112,7 @@ function setScreen() {
 setScreen();
 
 window.addEventListener("resize", setScreen);
+screen.orientation.addEventListener("change", setScreen);
 
 function clearScreen() {
   ctx.fillStyle = "white";
