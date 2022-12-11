@@ -111,8 +111,9 @@ function setScreen() {
 
 setScreen();
 
-window.addEventListener("resize", setScreen);
-screen.orientation.addEventListener("change", setScreen);
+window.addEventListener("resize", () => setTimeout(setScreen, 4000));
+
+// screen.orientation.addEventListener("change", setScreen);
 
 function clearScreen() {
   ctx.fillStyle = "white";
