@@ -129,7 +129,7 @@ function setScreen() {
 
 setScreen();
 
-window.addEventListener("resize", setScreen);
+window.addEventListener("resize", () => setTimeout(setScreen, 500));
 
 function clearScreen() {
   ctx.fillStyle = "white";
