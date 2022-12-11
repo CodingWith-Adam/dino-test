@@ -131,6 +131,7 @@ setScreen();
 
 //works in safari
 window.addEventListener("resize", () => setTimeout(setScreen, 500));
+
 if (screen.orientation) {
   //chrome
   screen.orientation.addEventListener("change", setScreen);
@@ -150,7 +151,7 @@ function startGameText() {
   ctx.fillText("Tap Screen or Press Space To Start", x, y);
 }
 
-let hasSetRestartEvents = false;
+let hasAddedEventListenersForRestart = false;
 function setGameOver() {
   const fontSize = 40 * scaleRatio;
   ctx.font = `${fontSize}px serif`;
@@ -159,8 +160,8 @@ function setGameOver() {
   const y = canvas.height / 2;
   ctx.fillText("GAME OVER", x, y);
 
-  if (!hasSetRestartEvents) {
-    hasSetRestartEvents = true;
+  if (!hasAddedEventListenersForRestart) {
+    hasAddedEventListenersForRestart = true;
 
     setTimeout(() => {
       document.addEventListener("keyup", reset, { once: true });
@@ -171,7 +172,6 @@ function setGameOver() {
 
 function updateGameSpeed(frameTimeDelta) {
   gameSpeed += gameSpeed * GAME_SPEED_INCREMENT * frameTimeDelta;
-  console.log(gameSpeed);
 }
 
 function gameLoop(currentTime) {
@@ -215,7 +215,7 @@ requestAnimationFrame(gameLoop);
 
 const reset = () => {
   waitingToStart = false;
-  hasSetRestartEvents = false;
+  hasAddedEventListenersForRestart = false;
   if (gameOver) {
     player.reset();
     ground.reset();

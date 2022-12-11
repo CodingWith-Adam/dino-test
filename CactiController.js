@@ -54,8 +54,6 @@ export default class CactiController {
 
     this.cacti = this.cacti.filter((cactus) => cactus.x > -cactus.width);
 
-    console.log(this.cacti.length);
-
     this.nextCactusInterval -= frameTimeDelta;
   }
 
@@ -90,10 +88,7 @@ class Cactus {
   }
 
   draw(ctx) {
-    ctx.strokeStyle = "red";
-
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    ctx.strokeRect(this.x, this.y, this.width, this.height);
   }
 
   collideWith(sprite) {

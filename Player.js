@@ -47,9 +47,11 @@ export default class Player {
 
     window.removeEventListener("keydown", this.keydown);
     window.removeEventListener("keyup", this.keyup);
-
     window.addEventListener("keydown", this.keydown);
     window.addEventListener("keyup", this.keyup);
+
+    window.removeEventListener("touchstart", this.touchstart);
+    window.removeEventListener("touchend", this.touchend);
     window.addEventListener("touchstart", this.touchstart);
     window.addEventListener("touchend", this.touchend);
   }
@@ -65,7 +67,6 @@ export default class Player {
   keydown = (event) => {
     if (event.code == "Space") {
       this.jumpPressed = true;
-      // event.returnValue = false;
     }
   };
 
@@ -127,9 +128,7 @@ export default class Player {
   }
 
   draw() {
-    this.ctx.strokeStyle = "blue ";
     this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    this.ctx.strokeRect(this.x, this.y, this.width, this.height);
   }
 
   reset() {
