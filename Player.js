@@ -28,16 +28,16 @@ export default class Player {
     this.yMax = this.y;
 
     this.standingStillImage = new Image();
-    this.standingStillImage.src = "/images/standing_still.png";
+    this.standingStillImage.src = "images/standing_still.png";
 
     this.jumpImage = new Image();
-    this.jumpImage.src = "/images/standing_still_eye_closed.png";
+    this.jumpImage.src = "images/standing_still_eye_closed.png";
 
     const dinoRun1Image = new Image();
-    dinoRun1Image.src = "/images/dino_run1.png";
+    dinoRun1Image.src = "images/dino_run1.png";
 
     const dinoRun2Image = new Image();
-    dinoRun2Image.src = "/images/dino_run2.png";
+    dinoRun2Image.src = "images/dino_run2.png";
 
     this.dinoRunImages.push(dinoRun1Image);
     this.dinoRunImages.push(dinoRun2Image);

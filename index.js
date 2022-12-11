@@ -6,7 +6,7 @@ import Score from "./Score.js";
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-const GAME_SPEED_START = 1.25;
+const GAME_SPEED_START = 1.0;
 const GAME_SPEED_INCREMENT = 0.00001;
 
 const GAME_WIDTH = 800;
@@ -126,6 +126,15 @@ function startGameText() {
   ctx.fillText("Tap Screen or Press Space To Start", x, y);
 }
 
+function gameOverText() {
+  const fontSize = 40 * scaleRatio;
+  ctx.font = `${fontSize}px serif`;
+  ctx.fillStyle = "red";
+  const x = canvas.width / 3.5;
+  const y = canvas.height / 2;
+  ctx.fillText("GAME OVER", x, y);
+}
+
 function updateGameSpeed(frameTimeDelta) {
   gameSpeed += gameSpeed * GAME_SPEED_INCREMENT * frameTimeDelta;
   console.log(gameSpeed);
@@ -152,7 +161,7 @@ function gameLoop(currentTime) {
 
   if (cactiController.collideWith(player)) {
     gameOver = true;
-    startGameText();
+    gameOverText();
     score.setHighScore();
   }
 
@@ -172,6 +181,7 @@ requestAnimationFrame(gameLoop);
 
 const reset = () => {
   waitingToStart = false;
+
   if (gameOver) {
     player.reset();
     ground.reset();
